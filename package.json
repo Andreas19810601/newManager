@@ -1,0 +1,41 @@
+{
+  "proxy": "http://localhost:3001",
+  "name": "manager",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "Validator": "^1.0.5",
+    "axios": "^0.16.2",
+    "bootstrap": "3",
+    "classnames": "^2.2.5",
+    "lodash": "^4.17.4",
+    "material-ui": "^0.18.6",
+    "react": "^15.6.1",
+    "react-bootstrap": "^0.31.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.2",
+    "react-router-redux": "next",
+    "react-scripts": "1.0.10",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "validator": "^8.0.0"
+  },
+  "lint-staged": {
+    "src/*/.{js,jsx,json,css}": [
+      "prettier --single-quote --tab-width 4 --write --no-semi",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "precommit": "lint-staged",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm run build-css && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
