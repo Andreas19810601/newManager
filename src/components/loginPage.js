@@ -1,16 +1,37 @@
 import React from 'react';
+//import { render } from 'react-dom'
+import { connect } from 'react-redux'
 import LoginForm from '../containers/loginForm';
 
-class LoginPage extends React.Component {
-  render() {
-    return (
+const LoginPage = (props) => (
+  
       <div className="row">
         <div className="col-md-4 col-md-offset-4">
           <LoginForm />
+            
         </div>
-      </div>
-    );
-  }
-}
+        {/* {props.count} */}
+      </div> 
+  
+)
 
-export default LoginPage;
+
+const mapStateToProps = state => ({
+  count: state.counter.count,
+})
+
+export default connect(mapStateToProps)(LoginPage);
+
+
+// class LoginPage extends React.Component {
+//   render() {
+//     return (
+//       <div className="row">
+//         <div className="col-md-4 col-md-offset-4">
+//           <LoginForm />
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+// export default Loginpage

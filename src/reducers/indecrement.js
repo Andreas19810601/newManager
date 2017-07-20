@@ -1,13 +1,21 @@
-import {DECREMENT, DECREMENT_REQUESTED, INCREMENT_REQUESTED, INCREMENT } from '../actions/constants'
+import {SET_USER, DECREMENT, DECREMENT_REQUESTED, INCREMENT_REQUESTED, INCREMENT } from '../actions/constants'
 
 const initialState = {
   count: 0,
   isIncrementing: false,
-  isDecrementing: false
+  isDecrementing: false,
+  test: 898,
+  user:null,
+  userRoll:null,
+  userId:null,
+  userSessionId:null,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_USER:
+            return {...state,
+                user: action.user}
     case INCREMENT_REQUESTED:
       return {
         ...state,

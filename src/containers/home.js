@@ -30,7 +30,7 @@ const Home = props => (
 const mapStateToProps = state => ({
   count: state.counter.count,
   isIncrementing: state.counter.isIncrementing,
-  isDecrementing: state.counter.isDecrementing
+  isDecrementing: state.counter.isDecrementing,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -41,7 +41,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/about-us')
 }, dispatch)
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home)
+export default connect(mapStateToProps,mapDispatchToProps)(Home)
