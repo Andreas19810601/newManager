@@ -5,8 +5,9 @@ import { bindActionCreators } from 'redux'
 import axios from 'axios'
 import TextFieldGroup from '../components/textFieldGroup';
 import { validationLogin } from '../other/validationLogin';
-import { setUser } from '../actions/setUser';
-
+import { setUserDisplayName } from '../actions/setUserDisplayName';
+import { setUserRole } from '../actions/setUserRole'
+import { setUserName } from  '../actions/setUserName'
 //const LoginForm = props => (
 class LoginForm extends React.Component {
   constructor(props) {
@@ -34,45 +35,37 @@ class LoginForm extends React.Component {
   //     (state) => {return state.get('message')}
   // );
 
-  getData = () => {
-    const dispatch = this.props.dispatch;
+  getData = (props) => {
+    //const dispatch = this.props.dispatch;
 
     axios({
-  method: 'post',
-  url: '/api',
-  data: JSON.stringify({
-    username: this.state.identifier,
-    password: this.state.password
-  })
-})
-
-    // fetch('/api', {
-    //   method: "POST",
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     username: this.state.identifier, password: this.state.password
-    //   })
-    // })
-      .then(function (res) {
-        if (res.successful) {
-          setUser(res.user);
-          // dispatch(addFlashMessage({
-          //     type: 'success',
-          //     text: 'Willkommen im Manager '+res.user.displayName+', Sie haben derzeit keine weiteren Nachrichten.'
-          // }));
-          // dispatch(addFlashMessage({
-          //     type: 'error',
-          //     text: "Falsch eingeloggt"
-          // }));
-          //redirect
-          //browserHistory.push('/features');
-        } else {
-
-          console.log("If ist falsch")
-        }
-      })
+      method: 'post',
+      url: '/api',
+      data: {
+        username: this.state.identifier,
+        password: this.state.password
+      }
+    }).then(function (res) {
+      if (res.data.successful) {
+        // setUser(res.user);
+        // dispatch(addFlashMessage({
+        //     type: 'success',
+        //     text: 'Willkommen im Manager '+res.user.displayName+', Sie haben derzeit keine weiteren Nachrichten.'
+        // }));
+        // dispatch(addFlashMessage({
+        //     type: 'error',
+        //     text: "Falsch eingeloggt"
+        // }));
+        //redirect
+        props.setUserRole(res.data.user.role)
+        props.setUserName(res.data.user.userName)
+        props.setUserDisplayName(res.data.user.displayName) 
+        props.changePage();
+      } else {
+        console.log('5 ', res.data.successful)
+        console.log("If ist falsch")
+      }
+    })
 
   }
 
@@ -80,7 +73,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
-      this.getData()
+      this.getData(this.props)
       // this.props.userLogin(this.state).then(
       //   (res) => this.props.changePage(),
       //(err) => this.setState({ errors: err.response.data.errors, isLoading: false })
@@ -124,13 +117,17 @@ class LoginForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userName: state.identifier
+  userName: state.counter.userName,
+  userDisplayName: state.counter.displayName,
+  userRole: state.counter.userRole,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/about-us'),
   //userLogin,
-  setUser
+  setUserDisplayName,
+  setUserName,
+  setUserRole
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);   

@@ -13,4 +13,3 @@ export const incrementAsync = () => {
     }, 3000)
   }
 }
-

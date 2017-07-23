@@ -1,5 +1,12 @@
 var express = require('express');
-var app = express();
+
+const argv = require('minimist')(process.argv.slice(2));
+const setup = require('./middlewares/frontendMiddleware');
+const isDev = process.env.NODE_ENV !== 'production';
+const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
+const resolve = require('path').resolve;
+const app = express();
+const bodyParser = require('body-parser');
 
 const userDb = [
 	{
@@ -20,14 +27,17 @@ const userDb = [
 //   res.send('{ "successful": true }');
 // });
 
+app.use(bodyParser.json());
+
 app.post('/api', function (req, res) {
-  console.log('1 ',req.username)
+  console.log('1 ', req.body.username)
+  console.log('2 ', req.body.password)
   res.setHeader('Content-Type', 'application/json');
 	for (i = 0; i < userDb.length; ++i) {
-		if (userDb[i].user == req.username && userDb[i].password == req.password) {
+		if (userDb[i].user == req.body.username && userDb[i].password == req.body.password) {
 			res.send({
 				user: {
-					userName: userDb[i].username,
+					userName: userDb[i].user,
 					displayName: userDb[i].displayName,
 					role: 'ADMIN',
 				},

@@ -1,21 +1,33 @@
-import {SET_USER, DECREMENT, DECREMENT_REQUESTED, INCREMENT_REQUESTED, INCREMENT } from '../actions/constants'
+import {SET_USERROLE, SET_USERNAME, SET_USERDISPLAYNAME, DECREMENT, DECREMENT_REQUESTED, INCREMENT_REQUESTED, INCREMENT } from '../actions/constants'
 
 const initialState = {
   count: 0,
   isIncrementing: false,
   isDecrementing: false,
-  test: 898,
-  user:null,
-  userRoll:null,
+  userName:null,
+  userDisplayName:null,
+  userRole:null,
   userId:null,
   userSessionId:null,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_USER:
+    case SET_USERDISPLAYNAME:
             return {...state,
-                user: action.user}
+                userDisplayName: action.userDisplayName
+              }
+
+    case SET_USERNAME:
+            return {...state,
+                userName: action.userName
+              }
+                  
+    case SET_USERROLE:
+            return {...state,
+                userRole: action.userRole
+              }
+
     case INCREMENT_REQUESTED:
       return {
         ...state,

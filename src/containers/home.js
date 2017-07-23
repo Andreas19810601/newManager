@@ -7,7 +7,6 @@ import {incrementAsync} from '../actions/incrementAsync'
 import {decrement} from '../actions/decrement'
 import {decrementAsync} from '../actions/decrementAsync'
 
-
 const Home = props => (
   <div>
     <h1>Home</h1>
