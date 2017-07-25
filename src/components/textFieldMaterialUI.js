@@ -11,60 +11,41 @@ export default class TextFieldMaterialUI extends Component {
     constructor(props){
         super(props)
         this.state={
-            field: props.field, //
-            //value: props.value, 
-            label: props.label, //
-            error: props.error, //
-            type: props.type, 
-            //onChange: props.onChange, 
-            checkUserExists: props.checkUserExists,
-            searchText: '',
+            // field: props.field, //
+            // value: props.value, //
+            // label: props.label, //
+            // error: props.error, //
+            // type: props.type, 
+            // onChange: props.onChange, //
+            // checkUserExists: props.checkUserExists,
             dataSource: [],//
         }
     }
 
-    
-
-  handleUpdateInput = (searchText) => {
+  handleUpdateInput = (value) => {
     this.setState({
-      searchText: searchText,
-      
+      dataSource: [
+        value,
+        value + value,
+        value + value + value,
+      ],
     });
   };
-
-  handleNewRequest = () => {
-    this.setState({
-      searchText: '',
-    });
-  };
-
-//   handleUpdateInput = (value) => {
-//     this.setState({
-//       dataSource: [
-//         value,
-//         value + value,
-//         value + value + value,
-//       ],
-//     });
-//   };
 
   render() {
       console.log(this.props.value)
     return (
       <div className={classnames('form-group', { 'has-error': this.props.error })}>
         <AutoComplete
-          dataSource={this.props.dataSource}
+          dataSource={this.state.dataSource}
           onUpdateInput={this.handleUpdateInput}
-          onNewRequest={this.handleNewRequest}
           floatingLabelText={this.props.label}
           fullWidth={false}
-          //value={this.props.value}
-          //onChange={this.props.onChange}
-          //name={this.props.field}
-          type={this.props.type} //auskommentieren ist hier blödsinn obwohl die materialui dieses Property nicht kennt
+          value={this.props.value}
+          onChange={this.props.onChange}
+          name={this.props.field}
+          type={this.props.type}
           errorText={this.props.error}
-          filter={(searchText, key) => (key.indexOf(searchText) !== -1)}
-          openOnFocus={true}
         />
       </div>
     );
