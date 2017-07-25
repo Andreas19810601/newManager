@@ -11,34 +11,60 @@ export default class TextFieldMaterialUI extends Component {
     constructor(props){
         super(props)
         this.state={
-            dataSource: [],
+            field: props.field, //
+            //value: props.value, 
+            label: props.label, //
+            error: props.error, //
+            type: props.type, 
+            //onChange: props.onChange, 
+            checkUserExists: props.checkUserExists,
+            searchText: '',
+            dataSource: [],//
         }
     }
 
-  handleUpdateInput = (value) => {
+    
+
+  handleUpdateInput = (searchText) => {
     this.setState({
-      dataSource: [
-        value,
-        value + value,
-        value + value + value,
-      ],
+      searchText: searchText,
+      
     });
   };
 
+  handleNewRequest = () => {
+    this.setState({
+      searchText: '',
+    });
+  };
+
+//   handleUpdateInput = (value) => {
+//     this.setState({
+//       dataSource: [
+//         value,
+//         value + value,
+//         value + value + value,
+//       ],
+//     });
+//   };
+
   render() {
-      console.log(this.props.value)
+      console.log(this.state.value)
     return (
-      <div className={classnames('form-group', { 'has-error': this.props.error })}>
+      <div className={classnames('form-group', { 'has-error': this.state.error })}>
         <AutoComplete
           dataSource={this.state.dataSource}
           onUpdateInput={this.handleUpdateInput}
-          floatingLabelText={this.props.label}
+          onNewRequest={this.handleNewRequest}
+          floatingLabelText={this.state.label}
           fullWidth={false}
-          value={this.props.value}
-          onChange={this.props.onChange}
-          name={this.props.field}
-          type={this.props.type}
-          errorText={this.props.error}
+          //value={this.state.value}
+          //onChange={this.state.onChange}
+          //name={this.state.field}
+          type={this.state.type} //auskommentieren ist hier blödsinn obwohl die materialui dieses Property nicht kennt
+          errorText={this.state.error}
+          filter={(searchText, key) => (key.indexOf(searchText) !== -1)}
+          openOnFocus={true}
         />
       </div>
     );
