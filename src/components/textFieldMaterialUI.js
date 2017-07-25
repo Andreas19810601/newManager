@@ -49,20 +49,20 @@ export default class TextFieldMaterialUI extends Component {
 //   };
 
   render() {
-      console.log(this.state.value)
+      console.log(this.props.value)
     return (
-      <div className={classnames('form-group', { 'has-error': this.state.error })}>
+      <div className={classnames('form-group', { 'has-error': this.props.error })}>
         <AutoComplete
-          dataSource={this.state.dataSource}
+          dataSource={this.props.dataSource}
           onUpdateInput={this.handleUpdateInput}
           onNewRequest={this.handleNewRequest}
-          floatingLabelText={this.state.label}
+          floatingLabelText={this.props.label}
           fullWidth={false}
-          //value={this.state.value}
-          //onChange={this.state.onChange}
-          //name={this.state.field}
-          type={this.state.type} //auskommentieren ist hier blödsinn obwohl die materialui dieses Property nicht kennt
-          errorText={this.state.error}
+          //value={this.props.value}
+          //onChange={this.props.onChange}
+          //name={this.props.field}
+          type={this.props.type} //auskommentieren ist hier blödsinn obwohl die materialui dieses Property nicht kennt
+          errorText={this.props.error}
           filter={(searchText, key) => (key.indexOf(searchText) !== -1)}
           openOnFocus={true}
         />
