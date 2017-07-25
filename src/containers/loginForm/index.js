@@ -1,9 +1,12 @@
 import React from 'react'
+import isEmpty from 'lodash/isEmpty';
+import RaisedButton from 'material-ui/RaisedButton';
+//import injectTapEventPlugin from 'react-tap-event-plugin';
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import TextFieldGroup from '../../components/textFieldGroup'
-import { validationLogin } from '../../other/validationLogin'
+import TextFieldGroup from '../../components/textFieldGroup' // funktioniert in gegensatz zu materialui
+import TextFieldMaterialUI from '../../components/textFieldMaterialUI'
 import { setUserLogin } from '../../actions/setUserLogin'
 
 class LoginForm extends React.Component {
@@ -13,12 +16,13 @@ class LoginForm extends React.Component {
       identifier: '',
       password: '',
       errors: {},
-      isLoading: false
+      isLoading: false  // to use isLoading in this context is questionable
     }
   }
 
+
   isValid() {
-    const { errors, isValid } = validationLogin(this.state);
+    const { errors, isValid } = this.validationLogin(this.state);
     if (!isValid) {
       this.setState({ errors })
     }
@@ -30,13 +34,30 @@ class LoginForm extends React.Component {
     e.preventDefault()
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true })
-      this.props.setUserLogin(this.state) 
-      this.props.changePage()
+      this.props.setUserLogin(this.state)
+      this.props.changePage() //TODO switch Statement ASYNC with userRole 
+      
     }
   }
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  validationLogin = (data) => {
+    let errors = {};
+
+    if (isEmpty(data.identifier)) {
+      errors.identifier = 'This field is required';
+    }
+
+    if (isEmpty(data.password)) {
+      errors.password = 'This field is required';
+    }
+    return {
+      errors,
+      isValid: isEmpty(errors)
+    };
   }
 
   render() {
@@ -48,7 +69,7 @@ class LoginForm extends React.Component {
 
         {/* {errors.form && <div className="alert alert-danger">{errors.form}</div>} */}
 
-        <TextFieldGroup
+        <TextFieldMaterialUI
           field="identifier"
           label="Username / Email"
           value={identifier}
@@ -56,7 +77,7 @@ class LoginForm extends React.Component {
           onChange={this.onChange}
         />
 
-        <TextFieldGroup
+        <TextFieldMaterialUI
           field="password"
           label="Password"
           value={password}
@@ -64,7 +85,10 @@ class LoginForm extends React.Component {
           onChange={this.onChange}
           type="password"
         />
-        <div className="form-group"><button className="btn btn-primary btn-lg" disabled={isLoading}>Login</button></div>
+        {/* <div className="form-group"><button className="btn btn-primary btn-lg" disabled={isLoading}>Login</button></div>
+        <div className="form-group"><button><RaisedButton label="Login" primary={true}/></button></div> */}
+        
+        <RaisedButton type="submit" label="Login" primary={true} disabled={isLoading} />
       </form>
     )
   }

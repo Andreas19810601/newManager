@@ -4,6 +4,7 @@ import Home from '../home'
 import About from '../about'
 import LoginPage from '../loginForm/loginPage'
 import Navbar from '../../components/navbar'
+//import Navbar from 'containers/components/navbar'
 
 const App = () => (
   <div>

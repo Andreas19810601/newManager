@@ -1,13 +1,12 @@
 import React from 'react';
 import classnames from 'classnames';
 
-const TextFieldGroup = ({ field, value, label, error, type, onChange, checkUserExists }) => {
+const TextFieldGroup = ({ field, value, label, error, type, onChange}) => {
   return (
     <div className={classnames('form-group', { 'has-error': error })}>
       <label className="control-label">{label}</label>
       <input
         onChange={onChange}
-        onBlur={checkUserExists}
         value={value}
         type={type}
         name={field}

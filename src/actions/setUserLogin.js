@@ -6,7 +6,7 @@ import { setUserName } from  './setUserName'
 import { setUserPassword } from './setUserPassword'
 
 
-export const setUserLogin = (p) => {
+export const setUserLogin = (p,change) => {
     return async dispatch => {
         dispatch({
             type: SET_USER_LOGIN
@@ -21,6 +21,7 @@ export const setUserLogin = (p) => {
             dispatch(setUserName(p.identifier))
             dispatch(setUserDisplayName(res.data.user.displayName))
             dispatch(setUserPassword(p.password))
+            //change()
         } else {
             console.log("If ist falsch")
         }
