@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import indecrement from './indecrement'
+import indecrementReducer from 'containers/home/modules'
+import loginReducer from 'containers/loginForm/modules'
 
 export default combineReducers({
   routing: routerReducer,
-  counter: indecrement
+  counter: indecrementReducer,
+  loginData: loginReducer,
 })

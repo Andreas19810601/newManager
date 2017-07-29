@@ -2,12 +2,10 @@ import React from 'react'
 import isEmpty from 'lodash/isEmpty';
 import RaisedButton from 'material-ui/RaisedButton';
 //import injectTapEventPlugin from 'react-tap-event-plugin';
-import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import TextFieldGroup from '../../components/textFieldGroup' // funktioniert in gegensatz zu materialui
-import TextFieldMaterialUI from '../../components/textFieldMaterialUI'
-import { setUserLogin } from '../../actions/setUserLogin'
+import TextFieldMaterialUI from 'components/textFieldMaterialUI'
+import { setUserLogin } from 'containers/loginForm/modules'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -34,13 +32,12 @@ class LoginForm extends React.Component {
     e.preventDefault()
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true })
-      this.props.setUserLogin(this.state)
-      this.props.changePage() //TODO switch Statement ASYNC with userRole 
-      
+      this.props.setUserLogin(this.state) 
     }
   }
 
   onChange = (e) => {
+    console.log({ [e.target.name]: e.target.value })
     this.setState({ [e.target.name]: e.target.value })
   }
 
@@ -67,7 +64,7 @@ class LoginForm extends React.Component {
       <form onSubmit={this.onSubmit}>
         <h1>Login</h1>
 
-        {/* {errors.form && <div className="alert alert-danger">{errors.form}</div>} */}
+         {errors.form && <div className="alert alert-danger">{errors.form}</div>} 
 
         <TextFieldMaterialUI
           field="identifier"
@@ -75,6 +72,7 @@ class LoginForm extends React.Component {
           value={identifier}
           error={errors.identifier}
           onChange={this.onChange}
+          type="text"
         />
 
         <TextFieldMaterialUI
@@ -85,8 +83,6 @@ class LoginForm extends React.Component {
           onChange={this.onChange}
           type="password"
         />
-        {/* <div className="form-group"><button className="btn btn-primary btn-lg" disabled={isLoading}>Login</button></div>
-        <div className="form-group"><button><RaisedButton label="Login" primary={true}/></button></div> */}
         
         <RaisedButton type="submit" label="Login" primary={true} disabled={isLoading} />
       </form>
@@ -95,13 +91,12 @@ class LoginForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userName: state.counter.userName,
-  userDisplayName: state.counter.displayName,
-  userRole: state.counter.userRole,
+  userName: state.loginData.userName,
+  userDisplayName: state.loginData.displayName,
+  userRole: state.loginData.userRole,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changePage: () => push('/about-us'),
   setUserLogin,
 }, dispatch)
 

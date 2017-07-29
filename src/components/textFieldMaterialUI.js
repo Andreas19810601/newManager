@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AutoComplete from 'material-ui/AutoComplete';
+import TextField from 'material-ui/TextField';
 import classnames from 'classnames';
 
 /**
@@ -18,31 +18,19 @@ export default class TextFieldMaterialUI extends Component {
             // type: props.type, 
             // onChange: props.onChange, //
             // checkUserExists: props.checkUserExists,
-            dataSource: [],//
+            //dataSource: [],//
         }
     }
-
-  handleUpdateInput = (value) => {
-    this.setState({
-      dataSource: [
-        value,
-        value + value,
-        value + value + value,
-      ],
-    });
-  };
 
   render() {
       console.log(this.props.value)
     return (
       <div className={classnames('form-group', { 'has-error': this.props.error })}>
-        <AutoComplete
-          dataSource={this.state.dataSource}
+        <TextField
           onUpdateInput={this.handleUpdateInput}
           floatingLabelText={this.props.label}
-          fullWidth={false}
           value={this.props.value}
-          onChange={this.props.onChange}
+          onChange={this.props.onChange} 
           name={this.props.field}
           type={this.props.type}
           errorText={this.props.error}
@@ -50,8 +38,4 @@ export default class TextFieldMaterialUI extends Component {
       </div>
     );
   }
-}
-
-TextFieldMaterialUI.defaultProps = {
-  type: 'text'
 }

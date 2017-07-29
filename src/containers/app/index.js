@@ -1,10 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom'
-import Home from '../home'
-import About from '../about'
-import LoginPage from '../loginForm/loginPage'
-import Navbar from '../../components/navbar'
-//import Navbar from 'containers/components/navbar'
+import Home from 'containers/home'
+import About from 'containers/about'
+import LoginPage from 'containers/loginForm/loginPage'
+import Navbar from 'components/navbar'
 
 const App = () => (
   <div>

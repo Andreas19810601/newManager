@@ -13,9 +13,9 @@ const About = props => (
 
 
 const mapStateToProps = state => ({
-  userName: state.counter.userName,
-  userDisplayName: state.counter.userDisplayName,
-  userRole: state.counter.userRole,
+  userName: state.loginData.userName,
+  userDisplayName: state.loginData.userDisplayName,
+  userRole: state.loginData.userRole,
 })
 
 export default connect(mapStateToProps)(About);   
