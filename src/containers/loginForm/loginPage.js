@@ -1,7 +1,5 @@
-import React from 'react';
-//import { render } from 'react-dom'
-import { connect } from 'react-redux'
-import LoginForm from './index.js';
+import React from 'react'
+import LoginForm from './index.js'
 
 const LoginPage = (props) => (
 
@@ -13,8 +11,6 @@ const LoginPage = (props) => (
 
 )
 
-const mapStateToProps = state => ({
-  count: state.counter.count,
-})
 
-export default connect(mapStateToProps)(LoginPage);
+
+export default LoginPage

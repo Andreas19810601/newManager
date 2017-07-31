@@ -29,11 +29,13 @@
       "git add"
     ]
   },
+
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
+    "prettier": "prettier --single-quote --tab-width 4 --write --no-semi 'src/**/*.{js,jsx,json,css}'",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "precommit": "lint-staged",
-    "nodestart": "node src/server.js",
+    "nodestart": "node server/index.js",
     "bundle": "yarn nodestart & yarn start-js",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",

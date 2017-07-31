@@ -23,7 +23,6 @@ export default class TextFieldMaterialUI extends Component {
     }
 
   render() {
-      console.log(this.props.value)
     return (
       <div className={classnames('form-group', { 'has-error': this.props.error })}>
         <TextField

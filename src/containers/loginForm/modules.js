@@ -6,6 +6,8 @@ const SET_USER_ROLE = 'login/SET_USER_ROLE'
 const SET_USER_NAME = 'login/SET_USER_NAME'
 const SET_USER_LOGIN = 'login/SET_USER_LOGIN'
 const SET_USER_PASSWORD = 'login/SET_USER_PASSWORD'
+const SET_USER_DATA = 'login/SET_USER_DATA'
+const SET_USER_LOGIN_REQUESTED = 'login/SET_USER_LOGIN_REQUESTED'
 
 const initialState = {
     userName: null,
@@ -14,37 +16,17 @@ const initialState = {
     userRole: null,
     userId: null,
     userSessionId: null,
-    isLoginProof: false,
+    isLoginRequested: false,
 }
 
-
-export const setUserDisplayName = (userDisplayName) => ({
-  type: SET_USER_DISPLAYNAME,
-  userDisplayName
-})
-
-
-export const setUserName = (userName) => ({
-  type: SET_USER_NAME,
-  userName
-})
-
-
-export const setUserPassword = (userPassword) => ({
-  type: SET_USER_PASSWORD,
-  userPassword
-})
-
-
-export const setUserRole = (userRole) => ({
-  type: SET_USER_ROLE,
-  userRole
+export const setUserData = (userDisplayName,userName,userPassword,userRole) => ({
+    type:SET_USER_DATA, userDisplayName,userName,userPassword,userRole
 })
 
 export const setUserLogin = (p) => {
     return async dispatch => {
         dispatch({
-            type: SET_USER_LOGIN
+            type: SET_USER_LOGIN_REQUESTED
         })
         const res = await axios.post('/api', {
             username: p.identifier,
@@ -52,10 +34,7 @@ export const setUserLogin = (p) => {
         })
         console.log(p.password)
         if (res.data.successful) {
-            dispatch(setUserRole(res.data.user.role))
-            dispatch(setUserName(p.identifier))
-            dispatch(setUserDisplayName(res.data.user.displayName))
-            dispatch(setUserPassword(p.password))
+            dispatch(setUserData(res.data.user.displayName,p.identifier,p.password,res.data.user.role))
             dispatch(push('/about-us')) //TODO switch Statement ASYNC with userRole
         } else {
             console.log("If ist falsch")
@@ -66,35 +45,20 @@ export const setUserLogin = (p) => {
 export default (state = initialState, action) => {
     switch (action.type) {
 
-        case SET_USER_PASSWORD:
-            return {
+        case SET_USER_DATA:
+            return{
                 ...state,
-                userPassword: action.userPassword
+                userDisplayName:action.userDisplayName,
+                userPassword:action.userPassword,
+                userName: action.userName,
+                userRole: action.userRole,
+                isLoginRequested: false
             }
 
-        case SET_USER_LOGIN:
+        case SET_USER_LOGIN_REQUESTED:
             return {
                 ...state,
-                isLoginProof: true
-            }
-
-        case SET_USER_DISPLAYNAME:
-            return {
-                ...state,
-                userDisplayName: action.userDisplayName,
-                isLoginProof: false
-            }
-
-        case SET_USER_NAME:
-            return {
-                ...state,
-                userName: action.userName
-            }
-
-        case SET_USER_ROLE:
-            return {
-                ...state,
-                userRole: action.userRole
+                isLoginRequested: true
             }
 
         default:
