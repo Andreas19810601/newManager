@@ -3,23 +3,23 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from './store'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import App from './containers/app'
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap-theme.css'
 import './index.css'
 
 const target = document.querySelector('#root')
 
 render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <MuiThemeProvider>
-      <div>
-        <App />
-      </div>
-      </MuiThemeProvider>
-    </ConnectedRouter>
-  </Provider>,
-  target
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
+            <MuiThemeProvider>
+                <div>
+                    <App />
+                </div>
+            </MuiThemeProvider>
+        </ConnectedRouter>
+    </Provider>,
+    target
 )

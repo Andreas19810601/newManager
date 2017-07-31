@@ -11,6 +11,7 @@
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "material-ui": "^0.18.7",
+    "prettier": "^1.5.3",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.1",
     "react-dom": "^15.6.1",
@@ -29,7 +30,6 @@
       "git add"
     ]
   },
-
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "prettier": "prettier --single-quote --tab-width 4 --write --no-semi 'src/**/*.{js,jsx,json,css}'",

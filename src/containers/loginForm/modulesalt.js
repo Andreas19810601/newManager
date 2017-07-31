@@ -32,14 +32,14 @@ export const setUserData = (
     userRole
 })
 
-export const setUserLogin = p => {
+export const setUserLogin = ({ username, password }) => {
     return async dispatch => {
         dispatch({
             type: SET_USER_LOGIN_REQUESTED
         })
         const res = await axios.post('/api', {
-            username: p.identifier,
-            password: p.password
+            username: username,
+            password: password
         })
         console.log(p.password)
         if (res.data.successful) {
@@ -58,8 +58,25 @@ export const setUserLogin = p => {
     }
 }
 
+/*
+export const setUserLoginData = (field, value) => {
+
+dispatch({
+    type: 'SET_USER_LOGIN_DATA',
+    field: field,
+    value: value
+})
+
+this.props.setUserLoginData('username', 'jk')
+*/
+
 export default (state = initialState, action) => {
     switch (action.type) {
+        case 'SET_USER_LOGIN_DATA':
+            return {
+                ...state,
+                [action.field]: action.value // username: 'jk'
+            }
         case SET_USER_DATA:
             return {
                 ...state,

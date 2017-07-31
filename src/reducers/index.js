@@ -3,6 +3,6 @@ import { routerReducer } from 'react-router-redux'
 import loginReducer from 'containers/loginForm/modules'
 
 export default combineReducers({
-  routing: routerReducer,
-  loginData: loginReducer,
+    routing: routerReducer,
+    loginData: loginReducer
 })

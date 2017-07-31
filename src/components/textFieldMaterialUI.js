@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import classnames from 'classnames';
+import React, { Component } from 'react'
+import TextField from 'material-ui/TextField'
+import classnames from 'classnames'
 
 /**
  * `AutoComplete` search text can be implemented as a controlled value,
@@ -8,33 +8,37 @@ import classnames from 'classnames';
  * This value is reset with the `onNewRequest` callback.
  */
 export default class TextFieldMaterialUI extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             // field: props.field, //
             // value: props.value, //
             // label: props.label, //
             // error: props.error, //
-            // type: props.type, 
+            // type: props.type,
             // onChange: props.onChange, //
             // checkUserExists: props.checkUserExists,
             //dataSource: [],//
         }
     }
 
-  render() {
-    return (
-      <div className={classnames('form-group', { 'has-error': this.props.error })}>
-        <TextField
-          onUpdateInput={this.handleUpdateInput}
-          floatingLabelText={this.props.label}
-          value={this.props.value}
-          onChange={this.props.onChange} 
-          name={this.props.field}
-          type={this.props.type}
-          errorText={this.props.error}
-        />
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div
+                className={classnames('form-group', {
+                    'has-error': this.props.error
+                })}
+            >
+                <TextField
+                    onUpdateInput={this.handleUpdateInput}
+                    floatingLabelText={this.props.label}
+                    value={this.props.value}
+                    onChange={this.props.onChange}
+                    name={this.props.field}
+                    type={this.props.type}
+                    errorText={this.props.error}
+                />
+            </div>
+        )
+    }
 }
