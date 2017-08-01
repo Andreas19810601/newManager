@@ -70,20 +70,18 @@ class LoginForm extends React.Component {
                 <TextFieldMaterialUI
                     field="identifier"
                     label="Username / Email"
-                    value={identifier}
                     error={errors.identifier}
                     onChange={this.onChange}
-                    onBlur={e=>this.props.setUserLoginData('userName', this.state.identifier)}
+                    onBlur={e=>this.props.setUserLoginData('userName', e.target.value)}
                     type="text"
                 />
 
                 <TextFieldMaterialUI
                     field="password"
                     label="Password"
-                    value={password}
                     error={errors.password}
                     onChange={this.onChange}
-                    onBlur={e=>this.props.setUserLoginData('userPassword', this.state.password)}
+                    onBlur={e=>this.props.setUserLoginData('userPassword', e.target.value)}
                     type="password"
                 />
 
