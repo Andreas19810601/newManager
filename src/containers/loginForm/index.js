@@ -73,7 +73,7 @@ class LoginForm extends React.Component {
                     value={identifier}
                     error={errors.identifier}
                     onChange={this.onChange}
-                    onBlur={this.props.setUserLoginData('userName',this.state.identifier)}
+                    onBlur={e=>this.props.setUserLoginData('userName', this.state.identifier)}
                     type="text"
                 />
 
@@ -83,7 +83,7 @@ class LoginForm extends React.Component {
                     value={password}
                     error={errors.password}
                     onChange={this.onChange}
-                    onBlur={this.props.setUserLoginData('userPassword',this.state.password)}
+                    onBlur={e=>this.props.setUserLoginData('userPassword', this.state.password)}
                     type="password"
                 />
 
