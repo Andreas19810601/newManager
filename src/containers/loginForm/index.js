@@ -11,10 +11,7 @@ class LoginForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            // identifier: '',
-            // password: '',
             errors: {},
-            // isLoading: false // to use isLoading in this context is questionable
         }
     }
 
@@ -35,7 +32,6 @@ class LoginForm extends React.Component {
     }
 
     onChange = e => {
-        //console.log({ [e.target.name]: e.target.value })
         this.setState({ [e.target.name]: e.target.value })
     }
 
