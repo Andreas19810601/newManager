@@ -5,16 +5,16 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import TextFieldMaterialUI from 'components/textFieldMaterialUI'
-import { setUserLogin } from 'containers/loginForm/modules'
+import { setUserLogin, setUserLoginData } from 'containers/loginForm/modules'
 
 class LoginForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            identifier: '',
-            password: '',
+           // identifier: '',
+           // password: '',
             errors: {},
-            isLoading: false // to use isLoading in this context is questionable
+           // isLoading: false // to use isLoading in this context is questionable
         }
     }
 
@@ -30,12 +30,12 @@ class LoginForm extends React.Component {
         e.preventDefault()
         if (this.isValid()) {
             this.setState({ errors: {}, isLoading: true })
-            this.props.setUserLogin(this.state)
+            this.props.setUserLogin(this.props)
         }
     }
 
     onChange = e => {
-        console.log({ [e.target.name]: e.target.value })
+        //console.log({ [e.target.name]: e.target.value })
         this.setState({ [e.target.name]: e.target.value })
     }
 
@@ -73,6 +73,7 @@ class LoginForm extends React.Component {
                     value={identifier}
                     error={errors.identifier}
                     onChange={this.onChange}
+                    onBlur={this.props.setUserLoginData('userName',this.state.identifier)}
                     type="text"
                 />
 
@@ -82,6 +83,7 @@ class LoginForm extends React.Component {
                     value={password}
                     error={errors.password}
                     onChange={this.onChange}
+                    onBlur={this.props.setUserLoginData('userPassword',this.state.password)}
                     type="password"
                 />
 
@@ -99,13 +101,14 @@ class LoginForm extends React.Component {
 const mapStateToProps = state => ({
     userName: state.loginData.userName,
     userDisplayName: state.loginData.displayName,
-    userRole: state.loginData.userRole
+    userRole: state.loginData.userRole,
+    userPassword: state.loginData.userPassword,
 })
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(
+const mapDispatchToProps = dispatch => bindActionCreators(
         {
-            setUserLogin
+            setUserLogin,
+            setUserLoginData
         },
         dispatch
     )

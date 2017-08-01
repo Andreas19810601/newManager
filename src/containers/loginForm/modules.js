@@ -1,13 +1,9 @@
 import axios from 'axios'
 import { push } from 'react-router-redux'
 
-const SET_USER_DISPLAYNAME = 'login/SET_USER_DISPLAYNAME'
-const SET_USER_ROLE = 'login/SET_USER_ROLE'
-const SET_USER_NAME = 'login/SET_USER_NAME'
-const SET_USER_LOGIN = 'login/SET_USER_LOGIN'
-const SET_USER_PASSWORD = 'login/SET_USER_PASSWORD'
 const SET_USER_DATA = 'login/SET_USER_DATA'
 const SET_USER_LOGIN_REQUESTED = 'login/SET_USER_LOGIN_REQUESTED'
+const SET_USER_LOGIN_DATA = 'login/SET_USER_LOGIN_DATA'
 
 const initialState = {
     userName: null,
@@ -19,12 +15,7 @@ const initialState = {
     isLoginRequested: false
 }
 
-export const setUserData = (
-    userDisplayName,
-    userName,
-    userPassword,
-    userRole
-) => ({
+export const setUserData = (userDisplayName, userName, userPassword, userRole) => ({
     type: SET_USER_DATA,
     userDisplayName,
     userName,
@@ -32,14 +23,26 @@ export const setUserData = (
     userRole
 })
 
-export const setUserLogin = p => {
+
+export const setUserLoginData = (field, value) => {
+    return dispatch => {
+        dispatch({
+            type: SET_USER_LOGIN_DATA,
+            field,
+            value
+        })
+    }
+}
+
+
+export const setUserLogin = (p) => {
     return async dispatch => {
         dispatch({
             type: SET_USER_LOGIN_REQUESTED
         })
         const res = await axios.post('/api', {
-            username: p.identifier,
-            password: p.password
+            username: p.userName,
+            password: p.userPassword
         })
         console.log(p.password)
         if (res.data.successful) {
@@ -67,7 +70,7 @@ export default (state = initialState, action) => {
                 userPassword: action.userPassword,
                 userName: action.userName,
                 userRole: action.userRole,
-                isLoginRequested: false
+                isLoginRequested: false,
             }
 
         case SET_USER_LOGIN_REQUESTED:
@@ -75,6 +78,12 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoginRequested: true
             }
+
+            case SET_USER_LOGIN_DATA:
+                return {
+                    ...state,
+                    [action.field]:action.value,
+                }
 
         default:
             return state
