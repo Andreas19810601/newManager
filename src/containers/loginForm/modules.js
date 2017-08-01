@@ -49,8 +49,8 @@ export const setUserLogin = (p) => {
             dispatch(
                 setUserData(
                     res.data.user.displayName,
-                    p.identifier,
-                    p.password,
+                    p.userName,
+                    p.userPassword,
                     res.data.user.role
                 )
             )

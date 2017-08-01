@@ -2,19 +2,19 @@ import React from 'react'
 import isEmpty from 'lodash/isEmpty'
 import RaisedButton from 'material-ui/RaisedButton'
 //import injectTapEventPlugin from 'react-tap-event-plugin';
+import TextField from 'material-ui/TextField'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import TextFieldMaterialUI from 'components/textFieldMaterialUI'
 import { setUserLogin, setUserLoginData } from 'containers/loginForm/modules'
 
 class LoginForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-           // identifier: '',
-           // password: '',
+            // identifier: '',
+            // password: '',
             errors: {},
-           // isLoading: false // to use isLoading in this context is questionable
+            // isLoading: false // to use isLoading in this context is questionable
         }
     }
 
@@ -66,25 +66,32 @@ class LoginForm extends React.Component {
                     <div className="alert alert-danger">
                         {errors.form}
                     </div>}
+                <div>
+                    <TextField
+                        onUpdateInput={this.handleUpdateInput}
+                        name="identifier"
+                        floatingLabelText="Username / Email"
+                        value={identifier}
+                        type="text"
+                        errorText={errors.identifier}
+                        onChange={this.onChange}
+                        onBlur={e => this.props.setUserLoginData('userName', e.target.value)}
+                        
+                    />
+                </div>
 
-                <TextFieldMaterialUI
-                    field="identifier"
-                    label="Username / Email"
-                    error={errors.identifier}
-                    onChange={this.onChange}
-                    onBlur={e=>this.props.setUserLoginData('userName', e.target.value)}
-                    type="text"
-                />
-
-                <TextFieldMaterialUI
-                    field="password"
-                    label="Password"
-                    error={errors.password}
-                    onChange={this.onChange}
-                    onBlur={e=>this.props.setUserLoginData('userPassword', e.target.value)}
-                    type="password"
-                />
-
+                <div>
+                    <TextField
+                        onUpdateInput={this.handleUpdateInput}
+                        name="password"
+                        floatingLabelText="Password"
+                        value={password}
+                        type="password"
+                        errorText={errors.password}
+                        onChange={this.onChange}
+                        onBlur={e => this.props.setUserLoginData('userPassword', e.target.value)}
+                    />
+                </div>
                 <RaisedButton
                     type="submit"
                     label="Login"
@@ -104,11 +111,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(
-        {
-            setUserLogin,
-            setUserLoginData
-        },
-        dispatch
-    )
+    {
+        setUserLogin,
+        setUserLoginData
+    },
+    dispatch
+)
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
