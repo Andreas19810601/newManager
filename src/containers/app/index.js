@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 // import Home from 'containers/home'
 // import About from 'containers/about'
 import LoginPage from 'containers/loginForm/loginPage'
+import ManagerList from 'containers/managerList'
 import Navbar from 'components/navbar'
 
 // <Route exact path="/" component={Home} />
@@ -16,6 +17,7 @@ const App = () =>
 
         <main>
             <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/about-us" component={ManagerList} />
         </main>
     </div>
 
