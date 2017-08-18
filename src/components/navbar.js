@@ -19,7 +19,7 @@ export default () => {
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link to="/about-us">About</Link>
+                            <Link to="/about-us">Benutzerverwaltung</Link>
                         </li>
                     </ul>
                 </div>

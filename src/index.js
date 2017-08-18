@@ -4,11 +4,15 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from './store'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import App from './containers/app'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
 import './index.css'
+import 'fonts/index.css'
 
+
+injectTapEventPlugin();
 const target = document.querySelector('#root')
 
 render(
